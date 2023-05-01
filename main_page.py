@@ -1,6 +1,8 @@
 import flet as ft
 import time
 import cliente
+import os
+import glob
 
 def main(page: ft.Page):
     # ------- Config gral pagina -----------
@@ -101,12 +103,22 @@ def main(page: ft.Page):
     # -----------------------------------------
 
     # ----------- Vista productos -------------
-    def import_images(n_images):
+    def import_images():
         imgs = []
 
-        for i in range(n_images):
+        # ruta de la carpeta
+        carpeta = "images/"
+
+        # extensión de archivo de imagen
+        extension = "*.png"
+
+        # búsqueda de archivos de imagen en la carpeta
+        productos = glob.glob(os.path.join(carpeta, extension))
+        print(productos)
+
+        for producto in productos:
             imgs.append(ft.Image(
-                src=f"https://picsum.photos/150/150?{time.time()}",
+                src=f"{producto}",
                 width=180,
                 height=180,
             ))
@@ -119,7 +131,7 @@ def main(page: ft.Page):
         child_aspect_ratio=1
     )
 
-    imgs = import_images(50)
+    imgs = import_images()
 
     for img in imgs:
         products.controls.append(
