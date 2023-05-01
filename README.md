@@ -14,6 +14,8 @@ pip install flet
 
 ## Correr
 
+Windows
+
 ```bash
-py main_page.py
+python main_page.py
 ```
