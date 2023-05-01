@@ -12,6 +12,12 @@
 pip install flet
 ```
 
+- Faker
+
+```bash
+pip install faker
+```
+
 ## Correr
 
 Windows
