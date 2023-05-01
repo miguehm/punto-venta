@@ -2,20 +2,15 @@ import flet as ft
 import time
 
 def main(page: ft.Page):
+    # ------- Config gral pagina -----------
+    page.appbar = ft.AppBar(
+        title=ft.Text("Selección de Productos"),
+        bgcolor=ft.colors.INVERSE_PRIMARY
 
+    )
+    # --------------------------------------
 
-    def import_images(n_images):
-        imgs = []
-
-        for i in range(n_images):
-            imgs.append(ft.Image(
-                src=f"https://picsum.photos/150/150?{time.time()}",
-                width=180,
-                height=180,
-            ))
-
-        return imgs
-
+    # ------------ Dialogo Info ------------
     def minus_click(e):
         value = int(txt_number.value)
         if value == 1:
@@ -39,16 +34,14 @@ def main(page: ft.Page):
         dlg.open = False
         page.update()
 
-    products = ft.GridView(expand=True, max_extent=200, child_aspect_ratio=1)
-    
-    txt_number = ft.TextField(value="1", text_align=ft.TextAlign.RIGHT, width=100)
+    cantidad = ft.TextField(value="1", text_align=ft.TextAlign.RIGHT, width=100)
 
     dlg = ft.AlertDialog(
         title=ft.Text("Seleccione la cantidad"),
         content=ft.Column(controls=[
             ft.Row([
                 ft.IconButton(ft.icons.REMOVE, on_click=minus_click),
-                txt_number,
+                cantidad,
                 ft.IconButton(ft.icons.ADD, on_click=plus_click)
             ]),
             ft.Text("Descripción: Coca Cola Zero Calorias"),
@@ -62,9 +55,9 @@ def main(page: ft.Page):
             ft.TextButton("Cancelar", on_click=close_dlg)
         ],
     )
+    # --------------------------------------
 
-    imgs = import_images(50)
-
+    # ---------- Menu Lateral ----------
     def menu_change(e):
         if(e.control.selected_index == 0):
             carrito_col.visible = False
@@ -95,27 +88,33 @@ def main(page: ft.Page):
         ],
         on_change=menu_change,
     )
+    # ----------------------------------
 
-    page.appbar = ft.AppBar(
-        title=ft.Text("Selección de Productos"),
-        bgcolor=ft.colors.INVERSE_PRIMARY
 
-    )
-
+    # ----------- Vista carrito ---------------
     carrito_col = ft.Column(controls=[
         ft.Text("Estás en el carrito"),
         ft.ElevatedButton("Click aqui!"),
     ])
     carrito_col.visible = False
+    # -----------------------------------------
 
-    page.add(
-        ft.Row([
-            rail,
-            ft.VerticalDivider(width=1),
-            products,
-            carrito_col
-        ],width=1080, height=720, vertical_alignment=ft.CrossAxisAlignment.START),
-    )
+    # ----------- Vista productos -------------
+    def import_images(n_images):
+        imgs = []
+
+        for i in range(n_images):
+            imgs.append(ft.Image(
+                src=f"https://picsum.photos/150/150?{time.time()}",
+                width=180,
+                height=180,
+            ))
+
+        return imgs
+
+    products = ft.GridView(expand=True, max_extent=200, child_aspect_ratio=1)
+
+    imgs = import_images(50)
 
     for img in imgs:
         products.controls.append(
@@ -131,6 +130,21 @@ def main(page: ft.Page):
                 on_click=open_dlg
             )
         )
+    # -----------------------------------------
+
+    # ------- Agregar vistas a la pagina ------
+    page.add(
+        ft.Row([
+            rail,
+            ft.VerticalDivider(width=1),
+            products,
+            carrito_col
+        ],
+        width=1080,
+        height=720,
+        vertical_alignment=ft.CrossAxisAlignment.START),
+    )
+    # -----------------------------------------
 
     page.update()
 
