@@ -1,5 +1,6 @@
 import flet as ft
 import time
+import cliente
 
 def main(page: ft.Page):
     # ------- Config gral pagina -----------
@@ -14,14 +15,14 @@ def main(page: ft.Page):
     def minus_click(e):
         value = int(txt_number.value)
         if value == 1:
-            txt_number.value = "1"
+            cantidad.value = "1"
         else:
-            txt_number.value = str(value-1)
+            cantidad.value = str(value-1)
 
         page.update()
 
     def plus_click(e):
-        txt_number.value = str(int(txt_number.value) + 1)
+        cantidad.value = str(int(cantidad.value) + 1)
         page.update()
 
     def open_dlg(e):
@@ -112,7 +113,11 @@ def main(page: ft.Page):
 
         return imgs
 
-    products = ft.GridView(expand=True, max_extent=200, child_aspect_ratio=1)
+    products = ft.GridView(
+        expand=True,
+        max_extent=200,
+        child_aspect_ratio=1
+    )
 
     imgs = import_images(50)
 

@@ -1,3 +1,4 @@
 build
 dist
 main_page.spec
+__pycache__
