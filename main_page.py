@@ -1,15 +1,20 @@
 import flet as ft
 import time
 
-def import_images(n_images):
-    imgs = []
-
-    for i in range(n_images):
-        imgs.append(ft.Image(src=f"https://picsum.photos/150/150?{time.time()}", width=180, height= 180))
-
-    return imgs
-
 def main(page: ft.Page):
+
+
+    def import_images(n_images):
+        imgs = []
+
+        for i in range(n_images):
+            imgs.append(ft.Image(
+                src=f"https://picsum.photos/150/150?{time.time()}",
+                width=180,
+                height=180,
+            ))
+
+        return imgs
 
     def minus_click(e):
         value = int(txt_number.value)
@@ -25,6 +30,7 @@ def main(page: ft.Page):
         page.update()
 
     def open_dlg(e):
+        print(e)
         page.dialog = dlg
         dlg.open = True
         page.update()
@@ -61,10 +67,10 @@ def main(page: ft.Page):
 
     def menu_change(e):
         if(e.control.selected_index == 0):
-            testText.visible = False
+            carrito_col.visible = False
             products.visible = True
         if(e.control.selected_index == 1):
-            testText.visible = True
+            carrito_col.visible = True
             products.visible = False
         page.update()
 
@@ -96,15 +102,18 @@ def main(page: ft.Page):
 
     )
 
-    testText = ft.Text("Estás en el carrito")
-    testText.visible = False
+    carrito_col = ft.Column(controls=[
+        ft.Text("Estás en el carrito"),
+        ft.ElevatedButton("Click aqui!"),
+    ])
+    carrito_col.visible = False
 
     page.add(
         ft.Row([
             rail,
             ft.VerticalDivider(width=1),
             products,
-            testText
+            carrito_col
         ],width=1080, height=720, vertical_alignment=ft.CrossAxisAlignment.START),
     )
 
