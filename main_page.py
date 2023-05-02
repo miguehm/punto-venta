@@ -1,6 +1,7 @@
 import flet as ft
 import time
 import clase_cliente
+import vista_pago_efectivo
 import os
 import glob
 
@@ -63,10 +64,12 @@ def main(page: ft.Page):
     # ---------- Menu Lateral ----------
     def menu_change(e):
         if(e.control.selected_index == 0):
-            carrito_col.visible = False
+            #carrito_col.visible = False
+            pago_efectivo.visible = False
             products.visible = True
         if(e.control.selected_index == 1):
-            carrito_col.visible = True
+            #carrito_col.visible = True
+            pago_efectivo.visible = True
             products.visible = False
         page.update()
 
@@ -100,6 +103,11 @@ def main(page: ft.Page):
         ft.ElevatedButton("Click aqui!"),
     ])
     carrito_col.visible = False
+
+    # importando vista pago efectivo
+    pago_efectivo = vista_pago_efectivo.getVistaPagoEfectivo()
+    pago_efectivo.visible = False
+
     # -----------------------------------------
 
     # ----------- Vista productos -------------
@@ -155,7 +163,8 @@ def main(page: ft.Page):
             rail,
             ft.VerticalDivider(width=1),
             products,
-            carrito_col
+            carrito_col,
+            pago_efectivo
         ],
         width=1080,
         height=720,

@@ -1,6 +1,6 @@
 import flet as ft
 
-def main(page: ft.Page):
+def getVistaPagoEfectivo():
     # Pago en Efectivo
 
     total_cobrar_tf = ft.TextField(
@@ -82,10 +82,5 @@ def main(page: ft.Page):
         )
     ])
 
-    page.add(
-        pago_efectivo
-    )
+    return pago_efectivo
 
-    page.update()
-
-ft.app(target=main)
