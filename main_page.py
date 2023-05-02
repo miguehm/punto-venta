@@ -1,6 +1,6 @@
 import flet as ft
 import time
-import cliente
+import clase_cliente
 import os
 import glob
 
