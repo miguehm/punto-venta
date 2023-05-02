@@ -6,7 +6,7 @@ def main(page: ft.Page):
 
     productos = []
 
-    with open('archivo.csv', 'r') as archivo_csv:
+    with open('productos.csv', 'r') as archivo_csv:
         lector_csv = csv.reader(archivo_csv)
         for i, fila in enumerate(lector_csv):
             if fila[0] == "nombre":
@@ -24,13 +24,19 @@ def main(page: ft.Page):
                 )
             )
 
-    containers = []
-    for i in productos:
-        containers.append(i.getContainer())
-
-    vista_productos = ft.Row(controls=
-        containers
+    vista_productos = ft.GridView(
+        expand=True,
+        max_extent=200,
+        child_aspect_ratio=1
     )
+
+    #containers = []
+    for i in productos:
+        vista_productos.controls.append(i.getContainer())
+
+    #vista_productos = ft.Row(controls=
+    #    containers
+    #)
 
     page.add(vista_productos)
 
