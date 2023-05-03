@@ -67,11 +67,11 @@ def main(page: ft.Page):
         if(e.control.selected_index == 0):
             #carrito_col.visible = False
             pago_efectivo.visible = False
-            products.visible = True
+            vista_productos.visible = True
         if(e.control.selected_index == 1):
             #carrito_col.visible = True
             pago_efectivo.visible = True
-            products.visible = False
+            vista_productos.visible = False
         page.update()
 
     rail = ft.NavigationRail(
