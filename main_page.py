@@ -2,6 +2,7 @@ import flet as ft
 import time
 import clase_cliente
 import vista_pago_efectivo
+from vista_productos import getVistaProductos
 import os
 import glob
 
@@ -111,50 +112,7 @@ def main(page: ft.Page):
     # -----------------------------------------
 
     # ----------- Vista productos -------------
-    def import_images():
-        imgs = []
-
-        # ruta de la carpeta
-        carpeta = "images/"
-
-        # extensión de archivo de imagen
-        extension = "*.png"
-
-        # búsqueda de archivos de imagen en la carpeta
-        productos = glob.glob(os.path.join(carpeta, extension))
-        print(productos)
-
-        for producto in productos:
-            imgs.append(ft.Image(
-                src=f"{producto}",
-                width=180,
-                height=180,
-            ))
-
-        return imgs
-
-    products = ft.GridView(
-        expand=True,
-        max_extent=200,
-        child_aspect_ratio=1
-    )
-
-    imgs = import_images()
-
-    for img in imgs:
-        products.controls.append(
-            ft.Container(
-                img,
-                width=100,
-                height=100,
-                alignment=ft.alignment.center,
-                bgcolor=ft.colors.AMBER_100,
-                border=ft.border.all(1, ft.colors.AMBER_400),
-                border_radius=ft.border_radius.all(5),
-                ink=True,
-                on_click=open_dlg
-            )
-        )
+    vista_productos = getVistaProductos()
     # -----------------------------------------
 
     # ------- Agregar vistas a la pagina ------
@@ -162,7 +120,7 @@ def main(page: ft.Page):
         ft.Row([
             rail,
             ft.VerticalDivider(width=1),
-            products,
+            vista_productos,
             carrito_col,
             pago_efectivo
         ],

@@ -2,7 +2,7 @@ import flet as ft
 import csv
 from clase_producto import Producto
 
-def main(page: ft.Page):
+def getVistaProductos():
 
     productos = []
 
@@ -38,9 +38,14 @@ def main(page: ft.Page):
     #    containers
     #)
 
+    return vista_productos
+
+def main(page: ft.Page):
+    vista_productos = getVistaProductos()
+
     page.add(vista_productos)
 
     page.update()
 
-ft.app(target=main)
-
+if __name__ == "__main__":
+    ft.app(target=main)

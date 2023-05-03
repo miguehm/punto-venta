@@ -2,6 +2,9 @@ from faker import Faker
 from faker.providers import credit_card
 import subprocess
 
+from flet_core.icons import QR_CODE
+from clase_carrito import Carrito
+
 # Gen num tarjeta
 fake = Faker()
 fake.add_provider(credit_card)
@@ -14,6 +17,7 @@ class Cliente:
         self.__credito = credito
         self.__numero_tarjeta = fake.credit_card_number()
         self.__nip_tarjeta = fake.credit_card_security_code()
+        self.__carrito = Carrito()
 
     def getNombre(self):
         return self.__nombre
@@ -40,6 +44,13 @@ class Cliente:
     def print_obj(self):
         for clave, valor in vars(self).items():
             print(f"{clave}: {valor}")
+
+    def addProducto(self, objProducto, cantidad):
+        self.__carrito.addProducto(objProducto, cantidad)
+
+    def getCarrito(self):
+        return self.__carrito.getCarrito()
+
 
 def main():
     c1 = Cliente("Miguel", False, 0)
