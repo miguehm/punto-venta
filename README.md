@@ -23,7 +23,7 @@ pip install faker
 Windows
 
 ```bash
-python main_page.py
+python vista_venta_productos.py
 ```
 ## Capturas
 

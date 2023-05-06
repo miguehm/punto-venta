@@ -1,6 +1,6 @@
 import flet as ft
 
-def getVistaPagoEfectivo():
+def getVistaPagoConsentido():
     total_cobrar_tf = ft.TextField(
         label="Total a cobrar",
         icon=ft.icons.MONEY,
@@ -9,15 +9,15 @@ def getVistaPagoEfectivo():
         read_only=True
     )
 
-    pago_cantidad_tf = ft.TextField(
-        label="Pago en cantidad",
-        icon=ft.icons.MONEY,
-        hint_text="Ingrese el pago recibido",
+    id_consentido_tf = ft.TextField(
+        label="ID Cliente Consentido",
+        icon=ft.icons.MANAGE_ACCOUNTS,
+        hint_text="Ingrese el ID del cliente",
     )
 
     def confirmacion_pago(e):
 
-        class CobroErroneo(Exception):
+        class IdErroneo(Exception):
             def __init__(self, mensaje):
                 self.mensaje = mensaje
 
@@ -28,13 +28,10 @@ def getVistaPagoEfectivo():
             total_cobrar = f"{total_cobrar_tf.value}"
             total_cobrar = round(float(total_cobrar))
 
-            pago_cantidad = f"{pago_cantidad_tf.value}"
-            pago_cantidad = int(pago_cantidad)
+            id_consentido = f"{id_consentido_tf.value}"
             
-            if pago_cantidad < total_cobrar:
-                raise CobroErroneo("El pago es menor al cobro total")
-
-            cambio = pago_cantidad - total_cobrar
+            if len(id_consentido) != 8:
+                raise IdErroneo("El formato del ID es incorrecto (8 caracteres)")
 
             # pendiente
             articulos_vendidos = 3
@@ -47,9 +44,11 @@ def getVistaPagoEfectivo():
                 modal=True,
                 title=ft.Text("Confirme la compra"),
                 content=ft.Column([
+                    ft.Text(f"Nombre: Eduardo Hernández Guzman"),
+                    ft.Text(f"ID: {id_consentido}"),
+                    ft.Text(f"Total crédito asignado: 2000"),
                     ft.Text(f"Total a cobrar: {total_cobrar}"),
-                    ft.Text(f"Pago en cantidad: {pago_cantidad}"),
-                    ft.Text(f"Cambio: {cambio}"),
+                    ft.Text(f"Crédito restante: {2000-total_cobrar}"),
                     ft.Text(f"Total articulos vendidos: {articulos_vendidos}"),
                 ], height=400),
                 actions=[
@@ -67,20 +66,20 @@ def getVistaPagoEfectivo():
             e.control.page.snack_bar = ft.SnackBar(ft.Text("Ingrese cantidades validas"))
             e.control.page.snack_bar.open = True
             e.control.page.update()
-        except CobroErroneo as err:
+        except IdErroneo as err:
             e.control.page.snack_bar = ft.SnackBar(ft.Text(f"{err}"))
             e.control.page.snack_bar.open = True
             e.control.page.update()
 
     # elementos de pago_efectivo
-    pago_efectivo = ft.Column([
+    pago_consentido = ft.Column([
         total_cobrar_tf,
-        pago_cantidad_tf,
+        id_consentido_tf,
         ft.ElevatedButton(
             text="click",
             on_click=confirmacion_pago
         )
     ])
 
-    return pago_efectivo
+    return pago_consentido
 

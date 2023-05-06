@@ -1,12 +1,12 @@
 import flet as ft
 
-def getVistaPagoEfectivo():
-    # Pago en Efectivo
-
+def getVistaPagoTarjeta():
     total_cobrar_tf = ft.TextField(
         label="Total a cobrar",
         icon=ft.icons.MONEY,
         hint_text="Ingrese el total a cobrar",
+        value="64.96",
+        read_only=True
     )
 
     numero_tarjeta_tf = ft.TextField(
@@ -34,7 +34,7 @@ def getVistaPagoEfectivo():
 
         try:
             total_cobrar = f"{total_cobrar_tf.value}"
-            total_cobrar = int(total_cobrar)
+            total_cobrar = round(float(total_cobrar))
 
             numero_tarjeta = f"{numero_tarjeta_tf.value}"
 
@@ -47,7 +47,7 @@ def getVistaPagoEfectivo():
                 raise DatoIncorrecto("Formato incorrecto en el numero PIN")
 
             # pendiente
-            articulos_vendidos = -1
+            articulos_vendidos = 3
 
             def close_confirmacion_dlg(e):
                 confirmacion_dlg.open = False

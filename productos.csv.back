@@ -1,0 +1,12 @@
+nombre,tipo,id,iva,descripcion,cantidad,precio,imagen
+Arroz,abarrotes,2df44f5f,5,Arroz super extra,12,20,./images/2df44f5f.png
+Cafe mediano,abarrotes,6effdddb,7,Cafe mediano soluble,8,15,./images/6effdddb.png
+Arroz Grueso,abarrotes,36a79261,11,Arroz Grueso estandar de cocina,20,33,./images/36a79261.png
+Leche condensada,abarrotes,46d14707,5,Leche condensada para postres,13,19,./images/46d14707.png
+Aceite,abarrotes,2d309c2,7,Aceite de girasol,9,18,./images/2d309c2.png
+Cafe grande,abarrotes,0262fc71,29,Cafe grande rendidor,3,99,./images/0262fc71.png
+Cereal,abarrotes,317cd385,31,Cereal de colores,3,119,./images/317cd385.png
+Nuez,abarrotes,860a2b60,11,Nues para ensaladas,9,44,./images/860a2b60.png
+Tortillas,abarrotes,5676bdbe,10,Tortillas de Harina,8,24,./images/5676bdbe.png
+Chocolate,dulceria,696250fe,44,Paquete de chocolates,5,219,./images/696250fe.png
+Cafe Gourmet,abarrotes,de692549,19,Cafe Gourmet de alta cocina,5,88,./images/de692549.png

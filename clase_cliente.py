@@ -1,6 +1,7 @@
 from faker import Faker
 from faker.providers import credit_card
 import subprocess
+import flet as ft
 
 from flet_core.icons import QR_CODE
 from clase_carrito import Carrito
@@ -37,6 +38,21 @@ class Cliente:
     def getNipTarjeta(self):
         return self.__nip_tarjeta
 
+    def setNombre(self, nombre):
+        self.__nombre = nombre
+
+    def setId(self, id):
+        self.__id = id
+
+    def setIsConsentido(self, id):
+        self.__is_consentido = id
+
+    def setNumeroTarjeta(self, numero_tarjeta):
+        self.__numero_tarjeta = numero_tarjeta
+
+    def setNipTarjeta(self, nip_tarjeta):
+        self.__nip_tarjeta = nip_tarjeta
+
     def setCredito(self, credito):
         self.__is_consentido = True
         self.__credito = credito
@@ -50,6 +66,61 @@ class Cliente:
 
     def getCarrito(self):
         return self.__carrito.getCarrito()
+
+    def getModificarBtn(self):
+        
+        def guardar_cambio(e):
+            dialogo.open = False
+            e.control.page.update()
+
+        def dlg_edit_producto(e):
+
+            e.control.page.dialog = dialogo
+            dialogo.open = True
+            e.control.page.update()
+
+        dialogo = ft.AlertDialog(
+            title=ft.Text("Modificando Cliente"),
+            content=ft.Column([
+                ft.TextField(
+                    label="Nombre: ",
+                    value=f"{self.getNombre()}"
+                ),
+                ft.TextField(
+                    label="ID: ",
+                    value=f"{self.getId()}",
+                    read_only=True
+                ),
+                ft.TextField(
+                    label="Consentido: ",
+                    value=f"{self.getIsConsentido()}"
+                ),
+                ft.TextField(
+                    label="Credito: ",
+                    value=f"{self.getCredito()}"
+                ),
+                ft.TextField(
+                    label="Tarjeta: ",
+                    value=f"{self.getNumeroTarjeta()}"
+                ),
+                ft.TextField(
+                    label="Nip: ",
+                    value=f"{self.getNipTarjeta()}"
+                ),
+            ]),
+            actions=[
+                ft.TextButton("Guardar", on_click=guardar_cambio),
+                ft.TextButton("Cancelar"),
+            ],
+            actions_alignment=ft.MainAxisAlignment.END
+        )
+
+        btn = ft.IconButton(
+            icon=ft.icons.EDIT,
+            on_click=dlg_edit_producto
+        )
+
+        return btn
 
 
 def main():
